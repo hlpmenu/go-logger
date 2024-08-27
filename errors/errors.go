@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"gopkg.hlmpn.dev/go-logger"
+	"gopkg.hlmpn.dev/pkg/go-logger"
 )
 
 // CustomError is a custom error type that satisfies the error interface

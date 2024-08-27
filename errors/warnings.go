@@ -1,6 +1,6 @@
 package errutil
 
-import "gopkg.hlmpn.dev/go-logger"
+import "gopkg.hlmpn.dev/pkg/go-logger"
 
 type Warning struct {
 	Message string

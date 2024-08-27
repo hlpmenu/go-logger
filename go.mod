@@ -1,3 +1,3 @@
-module gopkg.hlmpn.dev/go-logger
+module gopkg.hlmpn.dev/pkg/go-logger
 
 go 1.23.0
