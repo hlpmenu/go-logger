@@ -1,6 +1,8 @@
 package logger
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func LogErrorf(format string, args ...interface{}) {
 	// Define ANSI escape codes for red text and bold font
