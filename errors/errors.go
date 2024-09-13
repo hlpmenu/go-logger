@@ -10,7 +10,7 @@ import (
 	"gopkg.hlmpn.dev/pkg/go-logger"
 )
 
-// CustomError is a custom error type that satisfies the error interface
+// Error is a custom error type that satisfies the error interface
 type Error struct {
 	Message string
 }
@@ -19,7 +19,7 @@ func (e *Error) Unwrap() error {
 	return errors.New(e.Message)
 }
 
-// Error implements the error interface for CustomError
+// Error implements the error interface for Error
 func (e *Error) Error() string {
 	return e.Message
 }
@@ -82,10 +82,11 @@ func E(msg string) error {
 }
 
 // Errorf creates a new custom error with a formatted message
-func Errorf(format string, args ...interface{}) *Error {
-	return &Error{
+func Errorf(format string, args ...interface{}) error {
+	e := &Error{
 		Message: fmt.Sprintf(format, args...),
 	}
+	return error(e)
 }
 
 // TrError creates a formatted error message from the provided strings and error

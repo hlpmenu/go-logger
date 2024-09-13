@@ -69,6 +69,43 @@ func LogOrange(msg string) {
 	defaultLogger.Printf("\n%s%s %s %s\n",
 		bold, orange, msg, reset)
 }
+func LogRedf(format string, args ...interface{}) {
+	// Define ANSI escape codes for red text and bold font
+	red := "\033[31m"
+	bold := "\033[1m"
+	reset := "\033[0m"
+
+	// Define the emoji for the error message
+	emoji := emojiMap["fail"]
+
+	// Log a nicely formatted error message with ASCII colors and emoji
+	defaultLogger.Printf("\n\n%s%s========================================%s\n%s%s%s ERROR: %s%s\n%s%s========================================%s\n\n",
+		bold, red, reset,
+		bold, red, emoji, fmt.Sprintf(format, args...), reset,
+		bold, red, reset)
+}
+
+func LogPurplef(format string, args ...interface{}) {
+	// Define ANSI escape codes for dark purple text and bold font
+	darkPurple := "\033[35m"
+	bold := "\033[1m"
+	reset := "\033[0m"
+
+	// Log a nicely formatted file change detected message with ASCII colors and emoji
+	defaultLogger.Printf("\n%s%s %s %s\n",
+		bold, darkPurple, fmt.Sprintf(format, args...), reset)
+}
+
+func LogOrangef(format string, args ...interface{}) {
+	// Define ANSI escape codes for orange text and bold font
+	orange := "\033[38;5;214m" // 214 is the color code for orange in 256-color mode
+	bold := "\033[1m"
+	reset := "\033[0m"
+
+	// Log a nicely formatted file change detected message with ASCII colors and emoji
+	defaultLogger.Printf("\n%s%s %s %s\n",
+		bold, orange, fmt.Sprintf(format, args...), reset)
+}
 func NoteF(format string, v ...interface{}) {
 	msg := fmt.Sprintf(format, v...)
 	orange := "\033[38;5;214m" // 214 is the color code for orange in 256-color mode

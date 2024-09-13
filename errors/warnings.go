@@ -22,3 +22,9 @@ func NewNotice(msg string) *Warning {
 		Message: "NOTICE: " + msg,
 	}
 }
+
+func NewWarning(msg string) *Warning {
+	return &Warning{
+		Message: msg,
+	}
+}
