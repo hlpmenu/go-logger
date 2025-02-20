@@ -7,14 +7,15 @@ type Warning struct {
 }
 
 func (w *Warning) Log() {
-	logger.Warning(w.Message)
+	logger.Warn(w.Message)
 }
 
 func (w *Warning) Notice() {
 	logger.LogOrange("NOTICE: " + w.Message)
 }
+
 func (w *Warning) Warn() {
-	logger.Warning(w.Message)
+	logger.Warn(w.Message)
 }
 
 func NewNotice(msg string) *Warning {

@@ -29,7 +29,3 @@ var emojiMap = map[string]string{
 	"laptop":          "💻",
 	"mobile":          "📱",
 }
-
-func P(key string) {
-	_ = emojiMap
-}

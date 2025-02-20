@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+// LogErrorf logs a formatted error message in red with a bordered format and exits the program.
+// Output format:
+// ========================================
+// ❌ ERROR: your formatted message here
+// ========================================
+// After logging, the program will exit with a non-zero status code.
 func LogErrorf(format string, args ...interface{}) {
 	// Define ANSI escape codes for red text and bold font
 	red := "\033[31m"
@@ -20,6 +26,12 @@ func LogErrorf(format string, args ...interface{}) {
 		bold, red, reset)
 }
 
+// LogError logs an error message in red with a bordered format and exits the program.
+// Output format:
+// ========================================
+// ❌ ERROR: your message here
+// ========================================
+// After logging, the program will exit with a non-zero status code.
 func LogError(msg string) {
 	// Define ANSI escape codes for red text and bold font
 	red := "\033[31m"

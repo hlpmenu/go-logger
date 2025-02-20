@@ -53,7 +53,7 @@ func (e *Error) LogErrorFatal() {
 	e.LogFatalf("")
 }
 func (e *Error) LogErrorFatalf(format string, args ...interface{}) {
-	constmsg := fmt.Sprintf(format+fmt.Sprintf("Error: %s", e.Message), args...)
+	constmsg := fmt.Sprintf(format+"Error: "+e.Message, args...)
 	logger.LogRed(constmsg)
 	os.Exit(1)
 }

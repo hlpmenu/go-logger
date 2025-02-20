@@ -22,7 +22,7 @@ func LogURL(url string) {
 }
 
 func Clear() {
-	defaultLogger.Print("\033[H\033[2J")
+	defaultLogger.Print(clearScreen)
 }
 
 func Log(msg string) {
