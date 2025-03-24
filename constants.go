@@ -1,5 +1,6 @@
 package logger
 
+// ANSI escape codes for colored text and formatting
 const (
 	// Colors
 	red        = "\033[31m"

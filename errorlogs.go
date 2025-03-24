@@ -10,7 +10,7 @@ import (
 // ❌ ERROR: your formatted message here
 // ========================================
 // After logging, the program will exit with a non-zero status code.
-func LogErrorf(format string, args ...interface{}) {
+func LogErrorf(format string, args ...any) {
 	// Define ANSI escape codes for red text and bold font
 	red := "\033[31m"
 	bold := "\033[1m"

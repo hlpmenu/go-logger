@@ -30,5 +30,6 @@ func Log(msg string) {
 }
 
 func Logf(format string, v ...interface{}) {
+
 	defaultLogger.Printf(format, v...)
 }

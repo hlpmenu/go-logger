@@ -86,19 +86,3 @@ coverage/
 # Built Visual Studio Code Extensions
 *.vsi
 
-## Allowed files
-!.gitignore
-!server_Config.conf
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-!.cursor/settings.json
-!.cursor/tasks.json
-!.cursor/launch.json
-!.cursor/extensions.json
-!.cursor/*.code-snippets
-!.cursor/**/*.mdc
-!.cursor/rules/*
-!.cursor/rules/**/*.mdc

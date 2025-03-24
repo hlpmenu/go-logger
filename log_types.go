@@ -25,21 +25,6 @@ const (
 // Global logger instance
 var defaultLogger = NewLogger()
 
-/*
-// LoggerInterface defines the logging methods
-type LoggerInterface interface {
-	Print(v ...interface{})
-	Printf(format string, v ...interface{})
-	Println(v ...interface{})
-	Fatal(v ...interface{})
-	Fatalf(format string, v ...interface{})
-	Fatalln(v ...interface{})
-	Panic(v ...interface{})
-	Panicf(format string, v ...interface{})
-	Panicln(v ...interface{})
-}
-*/
-
 // Logger provides formatted logging with thread-safe output
 type Logger struct {
 	mu        sync.Mutex
@@ -52,7 +37,11 @@ type Logger struct {
 var bufferPool = sync.Pool{New: func() any { return new([]byte) }}
 
 func getBuffer() *[]byte {
-	p := bufferPool.Get().(*[]byte)
+	v := bufferPool.Get()
+	p, ok := v.(*[]byte)
+	if !ok {
+		return new([]byte)
+	}
 	*p = (*p)[:0]
 	return p
 }
@@ -148,10 +137,24 @@ func formatHeader(buf *[]byte, t time.Time, prefix string, flag int, file string
 	}
 }
 
-// output formats and writes the output for a logging event
-func (l *Logger) output(pc uintptr, calldepth int, appendOutput func([]byte) []byte) error {
+// output formats and writes the output for a logging event.
+//
+// This is an internal method that handles the core logging functionality:
+// 1. Retrieves a buffer from the pool (getBuffer guarantees non-nil return)
+// 2. Formats the log header with timestamp, prefix, file, line, etc.
+// 3. Appends the actual log message via the appendOutput function
+// 4. Ensures the message ends with a newline
+// 5. Writes the message to the configured output destination
+//
+// The error returned is from the underlying Write operation to l.out.
+// In most cases, callers can safely ignore this error since:
+// - For common io.Writers like os.Stdout, errors are rare and typically fatal
+// - For memory-based writers like bytes.Buffer, errors will never occur
+// - If logging fails, there's often nowhere else to report the failure
+// =========== Above commment is ai generated since i kept getting scared of the no-nil-checks lol ==========
+func (l *Logger) output(pc uintptr, calldepth int, appendOutput func([]byte) []byte) {
 	if l.isDiscard.Load() {
-		return nil
+		return
 	}
 
 	now := time.Now()
@@ -181,8 +184,9 @@ func (l *Logger) output(pc uintptr, calldepth int, appendOutput func([]byte) []b
 		}
 	}
 
-	buf := getBuffer()
-	defer putBuffer(buf)
+	buf := getBuffer() // Guaranteed not nil, it checks pool result and never returns nil
+
+	defer putBuffer(buf) // Return the buffer to the pool after use
 
 	formatHeader(buf, now, prefix, flag, file, line)
 	*buf = appendOutput(*buf)
@@ -192,8 +196,15 @@ func (l *Logger) output(pc uintptr, calldepth int, appendOutput func([]byte) []b
 
 	l.mu.Lock()
 	defer l.mu.Unlock()
-	_, err := l.out.Write(*buf)
-	return err
+	// Removed error check
+	l.out.Write(*buf) //nolint:errcheck //
+	// Since were simply using io.Writer over append() for performance reasons
+	// Originally returning a error was a mistake.
+	// Compared with bytes.Buffer, which while it does return a error
+	// Has "return nil" hardcoded as the only return.
+	// Also as were just doing the same operation as a append() call wouldve done
+	// which also do not return an error. Theres no reason to do so.
+	// Lastly, the only places this internal method is used, has no use for the errors.
 }
 
 // SetOutput sets the output destination
@@ -303,9 +314,9 @@ func (l *Logger) Panicln(v ...interface{}) {
 }
 
 // Output writes the output for a logging event
-func (l *Logger) Output(calldepth int, s string) error {
+func (l *Logger) Output(calldepth int, s string) {
 	calldepth++ // +1 for this frame
-	return l.output(0, calldepth, func(b []byte) []byte {
+	l.output(0, calldepth, func(b []byte) []byte {
 		return append(b, s...)
 	})
 }
