@@ -204,6 +204,7 @@ func (l *Logger) output(pc uintptr, calldepth int, appendOutput func([]byte) []b
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	// Removed error check
+	//#nosec G104 -- see below
 	l.out.Write(*buf) //nolint:errcheck //
 	// Since were simply using io.Writer over append() for performance reasons
 	// Originally returning a error was a mistake.
