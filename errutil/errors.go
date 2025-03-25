@@ -2,12 +2,12 @@ package errutil
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"os"
 	"strings"
 
 	"gopkg.hlmpn.dev/pkg/go-logger"
+	"gopkg.hlmpn.dev/pkg/xprint"
 )
 
 // Error is a custom error type that satisfies the error interface
@@ -53,7 +53,7 @@ func (e *Error) LogErrorFatal() {
 	e.LogFatalf("")
 }
 func (e *Error) LogErrorFatalf(format string, args ...interface{}) {
-	constmsg := fmt.Sprintf(format+"Error: "+e.Message, args...)
+	constmsg := xprint.Printf(format+"Error: "+e.Message, args...)
 	logger.LogRed(constmsg)
 	os.Exit(1)
 }
@@ -84,7 +84,7 @@ func E(msg string) error {
 // Errorf creates a new custom error with a formatted message
 func Errorf(format string, args ...interface{}) error {
 	e := &Error{
-		Message: fmt.Sprintf(format, args...),
+		Message: xprint.Printf(format, args...),
 	}
 	return error(e)
 }
@@ -104,12 +104,12 @@ func TrErr(msg string, err error, tags ...string) *Error {
 
 	tagsFormatted := strings.Join(tags, "")
 	return &Error{
-		Message: fmt.Sprintf("%s: %s, Error: %s", tagsFormatted, msg, errMsg),
+		Message: xprint.Printf("%s: %s, Error: %s", tagsFormatted, msg, errMsg),
 	}
 }
 
 func TrErrorf(functionname string, format string, args ...interface{}) *Error {
 	return &Error{
-		Message: fmt.Sprintf("%s: %s", functionname, fmt.Sprintf(format, args...)),
+		Message: xprint.Printf("%s: %s", functionname, xprint.Printf(format, args...)),
 	}
 }

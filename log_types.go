@@ -77,6 +77,13 @@ func NewLogger() *Logger {
 	return l
 }
 
+func newStdLnLogger() *Logger {
+	l := &Logger{
+		out: os.Stdout,
+	}
+	return l
+}
+
 // formatHeader writes log header to buf in following order:
 // - prefix (if not blank and Lmsgprefix is unset)
 // - date and/or time (if corresponding flags are provided)
@@ -329,10 +336,6 @@ func Print(v ...interface{}) {
 
 func Printf(format string, v ...interface{}) {
 	defaultLogger.Printf(format, v...)
-}
-
-func Println(v ...interface{}) {
-	defaultLogger.Println(v...)
 }
 
 func Fatal(v ...interface{}) {

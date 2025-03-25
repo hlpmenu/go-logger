@@ -1,8 +1,6 @@
 package logger
 
-import (
-	"fmt"
-)
+import "gopkg.hlmpn.dev/pkg/xprint"
 
 // LogErrorf logs a formatted error message in red with a bordered format and exits the program.
 // Output format:
@@ -22,7 +20,7 @@ func LogErrorf(format string, args ...any) {
 	// Log a nicely formatted error message with ASCII colors and emoji
 	defaultLogger.Fatalf("\n\n%s%s========================================%s\n%s%s%s ERROR: %s%s\n%s%s========================================%s\n\n",
 		bold, red, reset,
-		bold, red, emoji, fmt.Sprintf(format, args...), reset,
+		bold, red, emoji, xprint.Printf(format, args...), reset,
 		bold, red, reset)
 }
 

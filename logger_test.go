@@ -36,3 +36,8 @@ func TestExportedLogFunctions(t *testing.T) {
 		})
 	}
 }
+
+func TestPrintln(t *testing.T) {
+	lnLogger.Println("test")
+
+}

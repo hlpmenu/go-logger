@@ -157,7 +157,7 @@ func TestLogStruct(t *testing.T) {
 				t.Errorf("expected no error but got: %v", err)
 			}
 
-			if tt.errorIs != nil && err != tt.errorIs {
+			if tt.errorIs != nil && !errors.Is(err, tt.errorIs) {
 				t.Errorf("expected error to be %v but got: %v", tt.errorIs, err)
 			}
 		})
@@ -229,7 +229,7 @@ func TestLogSlice(t *testing.T) {
 				t.Errorf("expected no error but got: %v", err)
 			}
 
-			if tt.errorIs != nil && err != tt.errorIs {
+			if tt.errorIs != nil && !errors.Is(err, tt.errorIs) {
 				t.Errorf("expected error to be %v but got: %v", tt.errorIs, err)
 			}
 		})

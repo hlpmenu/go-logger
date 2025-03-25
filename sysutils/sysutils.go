@@ -1,3 +1,4 @@
+// DEPRECATED
 package sysutils
 
 import (
