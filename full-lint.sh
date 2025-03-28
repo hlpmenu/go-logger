@@ -6,4 +6,4 @@ if [ -z "$1" ]; then
 fi
 
 # Run the linter on the whole package but grep only for the specified file
-golangci-lint -c ./_lint/.golangci.json run "$@"
+golangci-lint -c ./_lint/.full.golangci.json run "$@"
