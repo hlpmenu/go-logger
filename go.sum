@@ -1,2 +1,4 @@
-gopkg.hlmpn.dev/pkg/xprint v0.0.4 h1:lnuHowSInsNSzYfm5lqTmvaZAf4O0M+PDPpAgk62jZ0=
-gopkg.hlmpn.dev/pkg/xprint v0.0.4/go.mod h1:r4VnMLzbvcz9y1u2h3tKpN84b89zRpGuYU231l8Wxd4=
+github.com/goccy/go-reflect v1.2.0 h1:O0T8rZCuNmGXewnATuKYnkL0xm6o8UNOJZd/gOkb9ms=
+github.com/goccy/go-reflect v1.2.0/go.mod h1:n0oYZn8VcV2CkWTxi8B9QjkCoq6GTtCEdfmR66YhFtE=
+gopkg.hlmpn.dev/pkg/xprint v0.0.7 h1:/AtE33kfwIgKZxRFoEr/AIyE1ggp7oCmhSAzmPTw6n8=
+gopkg.hlmpn.dev/pkg/xprint v0.0.7/go.mod h1:ohIxnGCZ2BkDtnrNX5O3ygPHmrjIkmZT1sJnB/ia6wQ=
