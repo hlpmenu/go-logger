@@ -42,7 +42,7 @@ jobs:
     
 
     - name: Run govulncheck
-      uses: golang/govulncheck-action@7da72f730e37eeaad891fcff0a532d27ed737cd4
+      uses: golang/govulncheck-action@b625fbe08f3bccbe446d94fbf87fcc875a4f50ee
       with:
         go-version-input: '1.24.1'
         go-package: ./...
