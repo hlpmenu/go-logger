@@ -23,7 +23,7 @@ jobs:
           go-version: '1.24.1'
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@dec74fa03096ff515422f71d18d41307cacde373
+        uses: golangci/golangci-lint-action@1d64cc17c98f6243ff9c45fc39cc6911222133e3
         with:
           version: v2.0.0
           args: --timeout=5m --config=_lint/.production.golangci.json 
