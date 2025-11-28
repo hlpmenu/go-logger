@@ -21,7 +21,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c
         with:
-          go-version: "1.25.04"
+          go-version: "1.25.4"
 
       - name: Verify dependencies
         run: |
@@ -34,7 +34,7 @@ jobs:
       - name: Run Gosec Security Scanner
         uses: securego/gosec@6be2b51fd78feca86af91f5186b7964d76cb1256
         env:
-          GOSECGOVERSION: "go1.25.04"
+          GOSECGOVERSION: "go1.25.4"
           GOTOOLCHAIN: auto
         with:
           args: ./...
@@ -42,7 +42,7 @@ jobs:
       - name: Run govulncheck
         uses: golang/govulncheck-action@b625fbe08f3bccbe446d94fbf87fcc875a4f50ee
         with:
-          go-version-input: "1.25.04"
+          go-version-input: "1.25.4"
           go-package: ./...
 
       - name: Build
