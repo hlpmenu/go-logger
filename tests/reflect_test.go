@@ -47,7 +47,7 @@ func Reflect(data any) error {
 
 func TestShowcaseRange(t *testing.T) {
 
-	var runs int = 10
+	var runs = 10
 	for i := range runs {
 		logger.Logf("hello world number %d", i)
 	}

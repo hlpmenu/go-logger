@@ -88,3 +88,5 @@ coverage.txt
 # Built Visual Studio Code Extensions
 *.vsi
 
+coverage.txt
+*.sarif

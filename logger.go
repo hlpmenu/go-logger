@@ -1,6 +1,9 @@
 package logger
 
 import (
+	"io"
+	"testing"
+
 	"gopkg.hlmpn.dev/pkg/xprint"
 )
 
@@ -15,7 +18,7 @@ func Warn(msg string) {
 }
 
 // Warnf logs a formatted warning message in orange with a warning triangle emoji (⚠️)
-func Warnf(format string, v ...interface{}) {
+func Warnf(format string, v ...any) {
 	msg := xprint.Printf(format, v...)
 
 	// Define a warning emoji for the log message
@@ -61,7 +64,7 @@ func LogOrange(msg string) {
 // ========================================
 // ❌ ERROR: your formatted message here
 // ========================================
-func LogRedf(format string, args ...interface{}) {
+func LogRedf(format string, args ...any) {
 	// Define the emoji for the error message
 	emoji := emojiMap["fail"]
 
@@ -73,21 +76,21 @@ func LogRedf(format string, args ...interface{}) {
 }
 
 // LogPurplef logs a formatted message in purple
-func LogPurplef(format string, args ...interface{}) {
+func LogPurplef(format string, args ...any) {
 	// Log a nicely formatted file change detected message with ASCII colors and emoji
 	defaultLogger.Printf("\n%s%s %s %s\n",
 		bold, darkPurple, xprint.Printf(format, args...), reset)
 }
 
 // LogOrangef logs a formatted message in orange
-func LogOrangef(format string, args ...interface{}) {
+func LogOrangef(format string, args ...any) {
 	// Log a nicely formatted file change detected message with ASCII colors and emoji
 	defaultLogger.Printf("\n%s%s %s %s\n",
 		bold, orange, xprint.Printf(format, args...), reset)
 }
 
 // NoteF logs a formatted note message in orange
-func NoteF(format string, v ...interface{}) {
+func NoteF(format string, v ...any) {
 	msg := xprint.Printf(format, v...)
 	defaultLogger.Printf("\n%s%s %s %s\n",
 		bold, orange, msg, reset)
@@ -100,7 +103,7 @@ func Note(msg string) {
 }
 
 // LogInfof logs a formatted info message with an info emoji (ℹ️)
-func LogInfof(format string, args ...interface{}) {
+func LogInfof(format string, args ...any) {
 	msg := xprint.Printf(format, args...)
 
 	// Define an info emoji for the log message
@@ -122,7 +125,7 @@ func LogInfo(msg string) {
 }
 
 // LogGreenf logs a formatted message in green
-func LogGreenf(format string, args ...interface{}) {
+func LogGreenf(format string, args ...any) {
 	// Log a nicely formatted message with ASCII colors
 	defaultLogger.Printf("\n%s%s %s %s\n",
 		bold, green, xprint.Printf(format, args...), reset)
@@ -148,7 +151,7 @@ func LogSuccess(msg string) {
 }
 
 // LogSuccessf logs a formatted success message in green with a bordered format and checkmark emoji
-func LogSuccessf(format string, args ...interface{}) {
+func LogSuccessf(format string, args ...any) {
 	// Define the emoji for the success message
 	emoji := emojiMap["success"]
 
@@ -157,4 +160,10 @@ func LogSuccessf(format string, args ...interface{}) {
 		bold, green, reset,
 		bold, green, emoji, xprint.Printf(format, args...), reset,
 		bold, green, reset)
+}
+
+// SetDefaultLoggerOutput sets the output writer for the default logger
+// Note that this is primarily intended for testing purposes
+func SetDefaultLoggerOutput(t *testing.T, w io.Writer) {
+	defaultLogger.SetOutput(w)
 }
