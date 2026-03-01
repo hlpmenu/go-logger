@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
 
       - name: Run Gosec Security Scanner
-        uses: securego/gosec@6be2b51fd78feca86af91f5186b7964d76cb1256
+        uses: securego/gosec@bb17e422fc34bf4c0a2e5cab9d07dc45a68c040c
         with:
           args: "-no-fail -fmt sarif -out gosec-results.sarif ./..."
 
